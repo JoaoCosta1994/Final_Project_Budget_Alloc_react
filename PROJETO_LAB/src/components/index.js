@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 export { default as BudgetValue } from './BudgetValue';
 export { default as ExpenseList } from './ExpenseList';
 export { default as DepSelected } from './DepSelected';

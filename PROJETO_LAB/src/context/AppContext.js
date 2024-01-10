@@ -7,27 +7,42 @@ export const AppReducer = (state, action) => {
     
     switch (action.type) {
         
-        case 'BUDGET_CHANGED':
+        case 'UPDATE_BUDGET':
             
-            alert("teste "+state.InitalBudget);
-            alert("teste "+action.payload.budget);
-            alert("teste "+action.type);
+        // state.SpentBudget<=state.InitalBudget && 
+            if(state.SpentBudget<=action.payload.budget)
             state.InitalBudget=action.payload.budget;
+            else
+            alert("You cannot reduce the budget value lower than spending");
+            //alert(state.InitalBudget+"<state<teste inside context>action> "+action.payload.budget);
             //action.payload;
             action.type = "DONE";
 
             return {
                 ...state,
             };
+        case 'UPDATE_SBUDGET':
+            //alert(state.SpentBudget+"<1state<teste inside context>action> "+action.payload.sptbudgets);
+         state.SpentBudget=action.payload.budget;
+        //alert(state.SpentBudget+"<1state<teste inside context>action> "+action.payload.sptbudget);
+        //action.payload;
+        //alert("Call");
+        action.type = "DONE";
+        return {
+            ...state,
+        };
         case 'ADD_BUDGET':
             let updatedqty = false;
             
             state.expenses.map((expense)=>{
             
                 if(expense.name === action.payload.name) {
-                   
+                    if((state.SpentBudget+(action.payload.budget))<=state.InitalBudget)
+                    {
                     expense.budget = expense.budget + action.payload.budget;
-                  
+                    }
+                    else
+                    alert("The value cannot exceed remainig fund of:"+state.Location+" "+(state.InitalBudget-state.SpentBudget));
                     updatedqty = true;
                 }
                 new_expenses.push(expense);
@@ -56,12 +71,20 @@ export const AppReducer = (state, action) => {
                 };
                 case 'MORE_TEN':
                 state.expenses.map((expense)=>{
-                  
+                    // alert("Remain:"+(state.InitalBudget-state.SpentBudget));
+                
                     if(expense.name === action.payload.name) {
+                        if((state.SpentBudget+(10))<=state.InitalBudget)
+                        {
                         expense.budget = expense.budget +10;
-                    }
+                        }
+                        else
+                        alert("The value cannot exceed remainig fund of:"+state.Location+" "+(state.InitalBudget-state.SpentBudget));
+                    } 
+                
                     expense.budget = expense.budget < 0 ? 0: expense.budget;
                     new_expenses.push(expense);
+               
                     return true;
                 })
                 state.expenses = new_expenses;
@@ -99,7 +122,9 @@ export const AppReducer = (state, action) => {
             };
     case 'CHG_LOCATION':
             action.type = "DONE";
-            state.Location = action.payload;
+           
+            state.Location = action.payload.location;
+            
             return {
                 ...state
             }
@@ -119,7 +144,8 @@ export const initialState = {
         { id: "Marketing Department", name: 'Marketing Department', budget: 0, unitprice: 200 },
     ],
     Location: '£',
-    InitalBudget:200
+    InitalBudget:0,
+    SpentBudget:0
 };
 
 // 2. Creates the context this is the thing our components import and use to get the state
@@ -128,7 +154,7 @@ export const AppContext = createContext();
 // 3. Provider component - wraps the components we want to give access to the state
 // Accepts the children, which are the nested(wrapped) components
 export const AppProvider = (props) => {
-    // 4. Sets up the app state. takes a reducer, and an initial state
+
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
     const totalExpenses = state.expenses.reduce((total, item) => {
@@ -139,6 +165,7 @@ state.BudgetValue = totalExpenses;
     return (
         <AppContext.Provider
             value={{
+                budget:state.budget,
                 expenses: state.expenses,
                 BudgetValue: state.BudgetValue,
                 dispatch,

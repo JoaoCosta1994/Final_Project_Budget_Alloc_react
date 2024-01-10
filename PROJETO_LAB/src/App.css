@@ -5,6 +5,11 @@
 {
   color:red !important; 
 }
+.test
+{
+  width:20px !important; 
+  height:20px !important; 
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -6,11 +6,31 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.padding40
+/* .padding40
 {
-  padding:30px !important;
+   padding:25px !important; 
+} */
+.padding_budgetvalue
+{
+  padding:15px !important;
+  padding-bottom:26px !important;
+  /*margin:16px !important;*/
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.myButton {
+  background-color: rgb(197, 197, 197) !important; 
+  color: white !important;
+  /* padding: 10px 20px !important; */
+  border: none !important;
+  border-radius: 5px !important;
+  cursor:pointer !important;
+  transition: background-color 0.3s !important;
+}
+
+.myButton:hover {
+  background-color: red !important;
 }

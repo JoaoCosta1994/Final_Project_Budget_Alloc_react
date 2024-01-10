@@ -8,7 +8,7 @@ const DepSelected = (props) => {
     const [budget, setBudget] = useState('');
     const [action, setAction] = useState('');
     const dep = ["IT", "HR", "MR"];
-
+    
     const submitEvent = () => {
 
         const item = {
@@ -58,15 +58,19 @@ const DepSelected = (props) => {
                   <option defaultValue value="Add" name="Add">Add</option>
                 <option value="Reduce" name="Reduce">Reduce</option>
                   </select>  
-                  <span className="eco" style={{ marginLeft: '2rem', marginRight: '8px'}}></span>
-
+                  <span className="eco" style={{ marginLeft: '2rem', marginRight: '8px',fontSize:'20px'}}> {initialState.Location}</span>
+                   
                     <input
                         required='required'
                         type='text'
                         id='cost'
+                        
                         value={budget}
                         style={{size: 10}}
-                        onChange={(event) => setBudget(event.target.value)}>
+                        onChange={(event) =>{ 
+                          const userInput = event.target.value;
+                          const sanitizedInput = userInput.replace(/[^0-9]/g, ''); 
+                          setBudget(sanitizedInput)}}>
                         </input>
 
                     <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>

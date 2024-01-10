@@ -15,7 +15,7 @@ const App=() =>{
     <div className="container">
       <h1 className="mt-3">Budget Allocation App</h1>
       <div className="row mt-3">
-        <div className="col-sm">
+        <div className="col-sm test">
           <Components.BudgetValue/>
         </div>
         <div className="col-sm">
@@ -27,9 +27,9 @@ const App=() =>{
         <div className="col-sm">
           <Components.Location/>
         </div>
-        <div className="col-sm">
+       {/* <div className="col-sm">
           <Components.MyComponent/>
-        </div>
+        </div>  */}
       </div>
       <h3 className="mt-3">Budget Allocation in each department </h3>
       <div className="row mt-3">
@@ -37,7 +37,7 @@ const App=() =>{
           <Components.ExpenseList/>
         </div>
       </div>
-      <h3 className="mt-3">Add Items</h3>
+      <h3 className="mt-3">Add Budget to Departments</h3>
       <div className="row mt-3">
       <div className="col-sm">
         <Components.DepSelected/>
