@@ -11,9 +11,7 @@ const methCall = new Promise((resolve,reject)=>{
     }
 });
 
-console.log(methCall);
-
-methCall.then(
+console.log(methCall.then(
   (data) => console.log(data),
   (err) => console.log("Error reading file") 
-);
+));
